@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1a1a1a;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.chat-container {
+  width: 350px;
+  background-color: #141414;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info h4 {
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.user-info p {
+  font-size: 12px;
+  color: #888;
+}
+
+.new-message {
+  margin-left: auto;
+  font-size: 12px;
+  color: #888;
+}
+
+.chat-body {
+  padding: 15px;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 80%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  line-height: 1.4;
+}
+
+.received {
+  background-color: #2e2e2e;
+  align-self: flex-start;
+}
+
+.sent {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+  text-align: right;
+  margin-left: auto;
+}
+
+.chat-footer {
+  display: flex;
+  padding: 10px;
+  background-color: #1e1e1e;
+  border-top: 1px solid #2a2a2a;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 10px;
+  background-color: #2a2a2a;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.chat-input:focus {
+  outline: none;
+}
+
+.send-button {
+  background: none;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.send-button img {
+  width: 24px;
+  height: 24px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <img src="avatar.png" alt="Avatar" class="avatar">
+      <div class="user-info">
+        <h4>Sofia Davis</h4>
+        <p>m@example.com</p>
+      </div>
+      <div class="new-message">New message</div>
+    </div>
+    <div class="chat-body">
+      <div class="message received">
+        <p>Hi, how can I help you today?</p>
+      </div>
+      <div class="message sent">
+        <p>Hey, I'm having trouble with my account.</p>
+      </div>
+      <div class="message received">
+        <p>What seems to be the problem?</p>
+      </div>
+      <div class="message sent">
+        <p>I can't log in.</p>
+      </div>
+    </div>
+    <div class="chat-footer">
+      <input type="text" placeholder="Type your message..." class="chat-input">
+      <button class="send-button">
+        <img src="send-icon.png" alt="Send">
+      </button>
+    </div>
+  </div>
+  <script>
+    const input = document.querySelector('.chat-input');
+const chatBody = document.querySelector('.chat-body');
+const sendButton = document.querySelector('.send-button');
+
+sendButton.addEventListener('click', () => {
+  const message = input.value;
+  if (message.trim() !== '') {
+    const newMessage = document.createElement('div');
+    newMessage.classList.add('message', 'sent');
+    newMessage.innerHTML = `<p>${message}</p>`;
+    chatBody.appendChild(newMessage);
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+});
+
+input.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    sendButton.click();
+  }
+});
+
+  </script>
+</body>
+</html>
